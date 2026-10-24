@@ -5,8 +5,8 @@ AtCoder・Codeforces で使用する、自分用の C++ ヘッダー集です。
 
 ## ファイル
 
-| ファイル | 用途・内容 | 依存関係 |
-| --- | --- | --- |
+| ファイル | 用途・内容 | 
+| --- | --- | 
 | [atcoder_cpp_setting.hpp](./atcoder_cpp_setting.hpp) | AtCoder 用。
 | [codeforces_cpp_setting.hpp](./codeforces_cpp_setting.hpp) | Codeforces 用。
 
