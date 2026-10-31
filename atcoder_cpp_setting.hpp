@@ -4,6 +4,7 @@ using namespace std;
 #include <atcoder/all>
 using namespace atcoder;
 
+//https://github.com/Rayta0320/competitive-programming-library
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 #define rrep(n, i) for (int i = (n-1); i>=0; --i)
 #define reps(i, n, s) for (int i = s; i<n; ++i)
@@ -15,33 +16,43 @@ const int INF = 1001001001;
 const ll LINF = (1LL << 60);
 const ll MOD = 998244353;
 using mint = modint998244353;
+using mint2 = modint1000000007;
 #define chmax(a, b) a = max(a, b)
 #define chmin(a, b) a = min(a, b)
 
-
-// CombMod<mint> combmod(n);
+// CombMod<mint> combmod;
 // combmod.C(n, r);
 template<class Mint>
 struct CombMod{
     vector<Mint> fact, ifact;
 
-    CombMod(int n){
+    CombMod(){
+        fact = {1};
+        ifact = {1};
+    }
+    
+    void ensure(int n){
+        int old = (int)fact.size() - 1;
+        if (old >= n) return;
+
         fact.resize(n+1);
-        ifact.resize(n+1);
-        fact[0] = 1;
         //factorial calculation
-        for(int i = 1; i <= n; i++){
-            fact[i] = fact[i-1] * i;
+        for (int i = old + 1; i <= n; i++) {
+            fact[i] = fact[i - 1] * i;
+
         }
+
+        ifact.resize(n+1);
         // 1 / n!
         ifact[n] = fact[n].inv();
         // 1 / i!
-        for (int i = n; i >= 1; i--){
-            ifact[i-1] = ifact[i] * i;
+        for (int i = n; i > old; i--) {
+            ifact[i - 1] = ifact[i] * i;
         }
     }
     Mint C(int n, int r){
-        if (r < 0 || r > n) return 0;
+        if (n < 0 || r < 0 || r > n) return 0;
+        ensure(n);
         // n! / (r!*(n-r)!)
         return fact[n] * ifact[r] * ifact[n-r];
     }
